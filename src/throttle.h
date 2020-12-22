@@ -1,3 +1,11 @@
+/*
+ * ebike-fw
+ *
+ * Copyright (C) Daniel Nilsson, 2020.
+ *
+ * Released under the GPL License, Version 3
+ */
+
 #ifndef  _THROTTLE_H_
 #define _THROTTLE_H_
 

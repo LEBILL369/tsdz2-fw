@@ -440,8 +440,8 @@ uint8_t motor_pas_pedaling_direction = 0;
 static uint8_t motor_pas_min_cadence_flag = 0;
 static uint16_t motor_pas_min_cadence_pwm_cycles_ticks = 0;
 
-uint8_t ui8_first_time_run_flag = 1;
-volatile uint16_t ui16_main_loop_wdt_cnt_1 = 0;
+static uint8_t motor_first_time_run_flag = 1;
+static volatile uint16_t motor_control_watchdog_count = 0;
 
 
 
@@ -861,6 +861,10 @@ void motor_set_pwm_duty_cycle_ramp_down_inverse_step(uint16_t value)
 	motor_pwm_duty_cycle_ramp_down_inverse_step = value;
 }
 
+void motor_feed_control_watchdog()
+{
+	motor_control_watchdog_count = 0;
+}
 
 
 
@@ -1421,28 +1425,28 @@ void TIM1_CMP_IRQHandler(void) __interrupt(TIM1_CMP_IRQ)
 	/****************************************************************************/
 
 	///****************************************************************************/
-	//// reload watchdog timer, every PWM cycle to avoid automatic reset of the microcontroller
-	//if (ui8_first_time_run_flag)
-	//{ // from the init of watchdog up to first reset on PWM cycle interrupt,
-	//  // it can take up to 250ms and so we need to init here inside the PWM cycle
-	//	ui8_first_time_run_flag = 0;
-	//	watchdog_init();
-	//}
-	//else
-	//{
-	//	IWDG->KR = IWDG_KEY_REFRESH; // reload watch dog timer counter
+	// reload watchdog timer, every PWM cycle to avoid automatic reset of the microcontroller
+	if (motor_first_time_run_flag)
+	{ // from the init of watchdog up to first reset on PWM cycle interrupt,
+	  // it can take up to 250ms and so we need to init here inside the PWM cycle
+		motor_first_time_run_flag = 0;
+		watchdog_init();
+	}
+	else
+	{
+		IWDG->KR = IWDG_KEY_REFRESH; // reload watch dog timer counter
 
-	//	// if the main loop counteris not reset that it is blocked, so, reset the system
-	//	++ui16_main_loop_wdt_cnt_1;
-	//	if (ui16_main_loop_wdt_cnt_1 > PWM_CYCLES_SECOND) // 1 second
-	//	{
-	//		// reset system
-	//		//  resets a STM8 microcontroller.
-	//		//  It activates the Window Watchdog, which resets all because its seventh bit is null.
-	//		//  See page 127 of  RM0016 (STM8S and STM8AF microcontroller family) for more details.
-	//		WWDG->CR = 0x80;
-	//	}
-	//}
+		// if the main loop counteris not reset that it is blocked, so, reset the system
+		++motor_control_watchdog_count;
+		if (motor_control_watchdog_count > PWM_CYCLES_SECOND) // 1 second
+		{
+			// reset system
+			//  resets a STM8 microcontroller.
+			//  It activates the Window Watchdog, which resets all because its seventh bit is null.
+			//  See page 127 of  RM0016 (STM8S and STM8AF microcontroller family) for more details.
+			WWDG->CR = 0x80;
+		}
+	}
 	///****************************************************************************/
 
 

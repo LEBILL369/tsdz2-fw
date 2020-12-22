@@ -34,6 +34,9 @@ void motor_set_pwm_duty_cycle_target(uint8_t value);
 void motor_set_pwm_duty_cycle_ramp_up_inverse_step(uint16_t value); // each step = 64us
 void motor_set_pwm_duty_cycle_ramp_down_inverse_step(uint16_t value); // each step = 64us
 
+// If not called for 1 second controller will be reset.
+void motor_feed_control_watchdog();
+
 void TIM1_CMP_IRQHandler(void) __interrupt(TIM1_CMP_IRQ);
 
 

@@ -1,3 +1,11 @@
+/*
+ * ebike-fw
+ *
+ * Copyright (C) Daniel Nilsson, 2020.
+ *
+ * Released under the GPL License, Version 3
+ */
+
 #include "app.h"
 #include "motor.h"
 #include "utils.h"
@@ -305,6 +313,8 @@ static void apply_throttle(uint32_t* target_current_amps_x10)
 static void adjust_power()
 {
 	uint32_t target_current_amps_x10 = 0;
+
+	motor_feed_control_watchdog();
 
 	// 15V is the lower hard limit for controller
 	if (motor_get_supply_voltage() > 15)

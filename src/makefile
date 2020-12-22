@@ -47,6 +47,7 @@ EXTRASRCS = \
 	throttle.c \
 	pas.c \
 	torque_sensor.c \
+	watchdog.c \
 	utils.c
 	
 HEADERS = \
@@ -59,6 +60,7 @@ HEADERS = \
 	pas.h \
 	throttle.h \
 	torque_sensor.h \
+	watchdog.h \
 	app.h \
 	utils.h
 

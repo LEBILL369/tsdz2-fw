@@ -1,3 +1,11 @@
+/*
+ * ebike-fw
+ *
+ * Copyright (C) Daniel Nilsson, 2020.
+ *
+ * Released under the GPL License, Version 3
+ */
+
 #ifndef _SYSTEM_H_
 #define _SYSTEM_H_
 
