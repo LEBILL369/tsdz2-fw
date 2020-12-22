@@ -55,7 +55,7 @@ Cruise is a lazy thottle mode which should be used with care\
 and is useful for e.g. daily commute.
 
 The (+) and (-) buttons selects between 7 different power levels\
-where power is feed to the motor independently if you are pedaling or not.\
+where power is feed to the motor independently if you are pedaling or not.
 
 In this mode the motor will stop when either of the brake buttons are\
 pressed or the throttle is touched. If any of those events occur it will\
