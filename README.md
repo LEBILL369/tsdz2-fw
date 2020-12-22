@@ -29,7 +29,7 @@ See ... for instruction on how this is to be made.
 The motor is controlled using the remote keypad through a set of key combinations.
 
 Available operation modes:
-* Torque adjusted pedal assist
+* Torque based pedal assist
 * Cruise
 
 Pedal assist is the selected operation mode on startup.
@@ -40,7 +40,7 @@ The brake signal is connected to both the info and power button on the keypad.
 This is a combo button which is also used to switch between the available modes.
 When any of the brake keys are pressed the motor will stop immediatelly.
 
-### Torque adjusted pedal assist
+### Torque based pedal assist
 This is the way the motor operates with the original firmware.
 
 There are 5 assist levels that can be tweaked in the code, see config.h.
