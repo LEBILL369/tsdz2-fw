@@ -1,0 +1,205 @@
+/*
+ * TongSheng TSDZ2 motor controller firmware/
+ *
+ * Copyright (C) Casainho, 2018.
+ *
+ * Released under the GPL License, Version 3
+ */
+
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
+
+
+// This file is the firmware configuration for the TSDZ2 motor controller,
+// to run the 2 different available motors of 36V or 48V motor,
+// and from 24V battery (7S) up to 52V battery pack (14S).
+
+
+// Current Limits
+// ---------------------------------------------------------------------------------
+// The limit of max battery current on original firmware is 16 amps!!
+#define MAX_BATTERY_CURRENT_X10					180 // 18 amps (0.156 amps each unit) - note that on original firmware is 16 amps
+#define MAX_MOTOR_CURRENT_X10					260 // 26 amps (0.156 amps each unit)
+
+// Motor
+// ---------------------------------------------------------------------------------
+
+// Choose PWM ramp up/down step (higher value will make the motor acceleration slower)
+//
+// For a 24V battery, 25 for ramp up seems ok. For an higher voltage battery, this values should be higher
+#define PWM_DUTY_CYCLE_RAMP_UP_INVERSE_STEP		36
+#define PWM_DUTY_CYCLE_RAMP_DOWN_INVERSE_STEP	32
+
+// The following value were tested by Casainho on 2020.04.23 
+#define FIELD_WEAKENING_RAMP_UP_INVERSE_STEP	600
+#define FIELD_WEAKENING_RAMP_DOWN_INVERSE_STEP	600
+
+// default values for ramp up
+#define RAMP_UP_AMPS_PER_SECOND_X10				80  // 8.0 amps per second ramp up
+
+// Choose some parameters for your motor (if you don't know, just keep the following original values because they should work ok)
+//
+// This value should be near 0.
+// You can try to tune with the whell on the air, full throttle and look at batttery current: adjust for lower battery current
+#define MOTOR_ROTOR_OFFSET_ANGLE				10
+
+// This value is ERPS speed after which a transition happens from sinewave no interpolation to have
+// interpolation 60 degrees and must be found experimentally but a value of 25 may be good
+#define MOTOR_ROTOR_ERPS_START_INTERPOLATION_60_DEGREES 10
+
+// Select your motor type
+#define MOTOR_TYPE_36V							1
+#define MOTOR_TYPE_48V							0
+#define MOTOR_TYPE								MOTOR_TYPE_48V
+
+
+#define PWM_CYCLES_COUNTER_MAX					3125U	// 5 erps minimum speed; 1/5 = 200ms; 200ms/64us = 3125
+#define PWM_CYCLES_SECOND						15625U	// 1 / 64us(PWM period)
+#define PWM_DUTY_CYCLE_MAX						254
+#define PWM_DUTY_CYCLE_MIN						20
+#define MIDDLE_PWM_DUTY_CYCLE_MAX				(PWM_DUTY_CYCLE_MAX/2)
+#define FIELD_WEAKENING_ANGLE_MAX				8 // 8 * 1.4 = 11 | tested by Casainho on 2020.04.23 and gives up to 125% more motor speed
+
+#define MOTOR_ROTOR_ANGLE_90					(63  + MOTOR_ROTOR_OFFSET_ANGLE)
+#define MOTOR_ROTOR_ANGLE_150					(106 + MOTOR_ROTOR_OFFSET_ANGLE)
+#define MOTOR_ROTOR_ANGLE_210					(148 + MOTOR_ROTOR_OFFSET_ANGLE)
+#define MOTOR_ROTOR_ANGLE_270					(191 + MOTOR_ROTOR_OFFSET_ANGLE)
+#define MOTOR_ROTOR_ANGLE_330					(233 + MOTOR_ROTOR_OFFSET_ANGLE)
+#define MOTOR_ROTOR_ANGLE_30					(20  + MOTOR_ROTOR_OFFSET_ANGLE)
+
+// motor maximum rotation
+#define MOTOR_OVER_SPEED_ERPS					675 // 675 is equal to 120 cadence, as TSDZ2 has a reduction ratio of 41.8
+#define MOTOR_SPEED_FIELD_WEAKEANING_MIN		250
+
+
+// PAS Levels
+// ---------------------------------------------------------------------------------
+#define PAS_LEVEL_0_FACTOR_X1000				0
+#define PAS_LEVEL_1_FACTOR_X1000				600
+#define PAS_LEVEL_2_FACTOR_X1000				1100
+#define PAS_LEVEL_3_FACTOR_X1000				2000
+#define PAS_LEVEL_4_FACTOR_X1000				3500
+#define PAS_LEVEL_5_FACTOR_X1000				5000
+
+
+// Cruise Levels
+// ----------------------------------------------------------------------------------
+#define CRUISE_LEVEL_0_AMPS_X10					0
+#define CRUISE_LEVEL_1_AMPS_X10					10
+#define CRUISE_LEVEL_2_AMPS_X10					25
+#define CRUISE_LEVEL_3_AMPS_X10					35
+#define CRUISE_LEVEL_4_AMPS_X10					48
+#define CRUISE_LEVEL_5_AMPS_X10					60
+#define CRUISE_LEVEL_6_AMPS_X10					82
+#define CRUISE_LEVEL_7_AMPS_X10					108
+
+
+// Throttle
+// ---------------------------------------------------------------------------------
+#define THROTTLE_FILTER_COEFFICIENT				1   // see note below
+#define ADC_THROTTLE_THRESHOLD					10  // value in ADC 8 bits step
+
+/*---------------------------------------------------------
+  NOTE: regarding throttle
+
+  Possible values: 0, 1, 2, 3, 4, 5, 6
+  0 equals to no filtering and no delay, higher values
+  will increase filtering but will also add a bigger delay.
+---------------------------------------------------------*/
+
+// throttle ADC values
+#define ADC_THROTTLE_MIN_VALUE					47
+#define ADC_THROTTLE_MAX_VALUE					176
+
+/*---------------------------------------------------------
+  NOTE: regarding throttle ADC values
+
+  Max voltage value for throttle, in ADC 8 bits step,
+  each ADC 8 bits step = (5 V / 256) = 0.0195
+---------------------------------------------------------*/
+
+
+// Torque Sensor
+// ---------------------------------------------------------------------------------
+// NOTE: regarding torque sensor
+//
+// Force (Nm) = weight Kg * 9.81 * 0.17 (0.17 = arm cranks size)
+// ---------------------------------------------------------*/
+#define TORQUE_SENSOR_ADC_THRESHOLD				1
+#define TORQUE_SENSOR_WEIGHT_TO_FORCE_X10		17
+
+/*---------------------------------------------------------
+  NOTE: regarding torque sensor
+
+  NOTE: the following information is incorrect as the torque sensor output is not linear.
+
+  Torque (force) value found experimentaly.
+
+  Measured with a cheap digital hook scale, we found that
+  each torque sensor unit is equal to 0.52 Nm. Using the
+  scale it was found that 0.33 kg was measured as 1 torque
+  sensor unit.
+
+  Force (Nm) = 1 Kg * 9.18 * 0.17 (0.17 = arm cranks size)
+---------------------------------------------------------*/
+#define PEDAL_TORQUE_X100						52
+
+
+// PAS
+// ---------------------------------------------------------------------------------
+#define PAS_NUMBER_MAGNETS									20 // see note below
+#define PAS_NUMBER_MAGNETS_X2								(PAS_NUMBER_MAGNETS * 2)
+#define PAS_NUMBER_MAGNETS_1_4								5
+#define PAS_NUMBER_MAGNETS_3_4								15
+#define PAS_ABSOLUTE_MAX_CADENCE_PWM_CYCLE_TICKS			(6250 / PAS_NUMBER_MAGNETS)   // max hard limit to 150 RPM PAS cadence, see note below
+#define PAS_ABSOLUTE_MIN_CADENCE_PWM_CYCLE_TICKS			(93750 / PAS_NUMBER_MAGNETS)  // min hard limit to 10 RPM PAS cadence, see note below
+
+/*---------------------------------------------------------
+  NOTE: regarding PAS
+
+  PAS_NUMBER_MAGNETS = 20, was validated on August 2018
+  by Casainho and jbalat
+
+  x = (1/(150RPM/60)) / (0.000064)
+
+  PAS_ABSOLUTE_MAX_CADENCE_PWM_CYCLE_TICKS =
+  (x / PAS_NUMBER_MAGNETS)
+---------------------------------------------------------*/
+
+// ADC battery voltage measurement
+// ---------------------------------------------------------------------------------
+#define ADC10BITS_BATTERY_VOLTAGE_PER_ADC_STEP_X512			44
+#define ADC10BITS_BATTERY_VOLTAGE_PER_ADC_STEP_X256			(ADC10BITS_BATTERY_VOLTAGE_PER_ADC_STEP_X512 >> 1)
+#define ADC8BITS_BATTERY_VOLTAGE_PER_ADC_STEP_INVERSE_X256	(ADC10BITS_BATTERY_VOLTAGE_PER_ADC_STEP_X256 << 2)
+
+#define ADC8BITS_BATTERY_MOTOR_CUT_OFF						55  //119		// 41V
+
+/*---------------------------------------------------------
+  NOTE: regarding ADC battery voltage measurement
+
+  0.344 per ADC_8bits step:
+
+  17.9 V -->  ADC_8bits  = 52;
+  40 V   -->  ADC_8bits  = 116;
+
+  This signal is atenuated by the opamp 358.
+---------------------------------------------------------*/
+
+// ADC battery current measurement
+// ---------------------------------------------------------------------------------
+#define ADC10BITS_BATTERY_CURRENT_PER_ADC_STEP_X512			80 // 1A per 6.4 steps of ADC_10bits (0.156A per each ADC step)
+#define READ_BATTERY_CURRENT_FILTER_COEFFICIENT				2
+#define READ_MOTOR_CURRENT_FILTER_COEFFICIENT				2
+#define READ_BATTERY_VOLTAGE_FILTER_COEFFICIENT				2
+
+/*---------------------------------------------------------
+  NOTE: regarding ADC battery current measurement and
+  filter coefficients
+
+  Possible values: 0, 1, 2, 3, 4, 5, 6
+  0 equals to no filtering and no delay, higher values
+  will increase filtering but will also add a bigger delay.
+---------------------------------------------------------*/
+
+
+#endif /* _CONFIG_H_ */
