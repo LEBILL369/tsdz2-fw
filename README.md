@@ -42,10 +42,10 @@ This is a combo button which is also used to switch between the available modes.
 When any of the brake keys are pressed the motor will stop immediatelly.
 
 ### Torque adjusted pedal assist
-This is the way the motor operates with the original firmware.\
+This is the way the motor operates with the original firmware.
 
 There are 5 assist levels that can be tweaked in the code, see config.h.\
-Assist level is adjusted by the (+) and (-) buttons on the keypad.\
+Assist level is adjusted by the (+) and (-) buttons on the keypad.
 
 This mode is entered by holding down info/power combo button for 2s\
 followed by pressing the (-) button.
