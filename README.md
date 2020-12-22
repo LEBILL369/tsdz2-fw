@@ -26,7 +26,7 @@ See ... for instruction on how this is to be made.
 
 
 ## Operation
-The motor is controlled though the remote keypad through a set of key combinations.
+The motor is controlled using the remote keypad through a set of key combinations.
 
 Available operation modes:
 * Torque adjusted pedal assist
