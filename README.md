@@ -69,7 +69,7 @@ followed by pressing the (+) button.
 
 ### Reset
 If for any reason you want to return to startup mode, hold down
-brake button for 10 seconds and it will revert back to pedal assist
+any of the brake buttons for 10 seconds and it will revert back to pedal assist
 with throttle disabled.
 
 ## Code Changes from Base
