@@ -1,7 +1,7 @@
 
 ## Background
-This firmware is intended to be used with the popular TSDZ2 electric 
-bike mid mount motor manufactured by Tongsheng.
+This firmware is intended to be used with the popular TSDZ2\
+electric bike mid mount motor manufactured by Tongsheng.
 
 It is based on the work of casainho and others.\
 https://github.com/OpenSourceEBike/TSDZ2-Smart-EBike
