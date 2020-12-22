@@ -804,6 +804,7 @@ void motor_set_target_max_motor_current(uint16_t amps_x10)
 
 	motor_adc_target_motor_max_current += offset;
 	motor_adc_target_motor_max_current_fw += offset;
+
 }
 
 void motor_set_current_ramp_up_amps_s(uint8_t value_x10)

@@ -9,6 +9,8 @@
 #ifndef _PAS_H_
 #define _PAS_H_
 
+#include <stdint.h>
+
 void pas_init(void);
 
 uint32_t pas_get_cadence_rpm();

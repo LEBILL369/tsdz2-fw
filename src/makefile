@@ -45,6 +45,7 @@ EXTRASRCS = \
 	adc.c \
 	brake.c \
 	throttle.c \
+	pas.c \
 	torque_sensor.c \
 	utils.c
 	
@@ -55,6 +56,7 @@ HEADERS = \
 	adc.h \
 	brake.h \
 	motor.h \
+	pas.h \
 	throttle.h \
 	torque_sensor.h \
 	app.h \

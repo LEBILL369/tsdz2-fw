@@ -7,6 +7,7 @@
 #include "motor.h"
 #include "torque_sensor.h"
 #include "throttle.h"
+#include "pas.h"
 #include "app.h"
 
 
@@ -19,6 +20,7 @@ int main(void)
 	system_init();
 	adc_init();
 	brake_init();
+	pas_init();
 	torque_sensor_init();
 	throttle_init();
 	motor_init();
