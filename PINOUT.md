@@ -4,14 +4,14 @@
 
 color  | description                                       
 ------ | -------------------------------------------------
-blue   | V_BAT+                                           
-black  | GND                                              
+blue   | V_BAT+
+black  | GND
 red    | ENABLE (connector to V_BAT+ to enable controller)
-brown  | UART_TX                                          
-yellow | UART_RX                                          
-green  | BRAKE                                            
-white  | 5V                                               
-orange | THROTTLE                                         
+brown  | UART_TX
+yellow | UART_RX
+green  | BRAKE (active low)
+white  | +5V
+orange | THROTTLE
 
 
 ## Speed Sensor Connector
@@ -22,7 +22,7 @@ brown  | IN/OUT | V_MCU (e.g. supply for programming)
 green  | OUTPUT | V_HEADLIGHT
 orange | -      | GROUND
 purple | INPUT  | RST (not needed with stlink v2)
-white  | IN/OUT | speed sensor / low active
+white  | IN/OUT | speed sensor (active low)
 
 ## Remote Controller
 
@@ -48,10 +48,11 @@ blue   | SIGNAL
 
 orignal  | custom
 -------- | -------------------------- 
-UART_TX  | Remote BTN (+)
-UART_RX  | Remote BTN (-)
-BRAKE    | BTN INFO || BTN PWR
+UART_TX  | BTN (+)
+UART_RX  | BTN (-)
+BRAKE    | BTN INFO & BTN PWR
 THROTTLE | THROTTLE
 +5V      | +5V THROTTLE
+GND      | THROTTLE GND & REMOTE GND
 V_BAT+	 | -> ENABLE
-ENABLE   | -> VBAT+
+ENABLE   | -> V_BAT+
