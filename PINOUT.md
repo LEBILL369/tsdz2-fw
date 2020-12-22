@@ -2,16 +2,16 @@
 
 ## Display Connector (8pin)
 
-color  | description                                     |
------- | ----------------------------------------------- | 
-blue   | V_BAT+                                          |
-black  | GND                                             |
-red    | ENABLE (connector to P+ to enable controller)   |
-brown  | UART_TX                                         |
-yellow | UART_RX                                         |
-green  | BRAKE                                           |
-white  | 5V                                              |
-orange | THROTTLE                                        |
+color  | description                                       
+------ | -------------------------------------------------
+blue   | V_BAT+                                           
+black  | GND                                              
+red    | ENABLE (connector to V_BAT+ to enable controller)
+brown  | UART_TX                                          
+yellow | UART_RX                                          
+green  | BRAKE                                            
+white  | 5V                                               
+orange | THROTTLE                                         
 
 
 ## Speed Sensor Connector
@@ -26,33 +26,32 @@ white  | IN/OUT | speed sensor / low active
 
 ## Remote Controller
 
-color  | description |
------- | ----------- | 
-black  | GND         |
-brown  | BTN -       |
-green  | BTN INFO    |
-orange | BTN PWR     |
-white  | BTN +       |
+color  | description
+------ | ----------- 
+black  | GND
+brown  | BTN (-)
+green  | BTN INFO
+orange | BTN PWR
+white  | BTN (+)
 
 ## Throttle
 
-color  | description |
------- | ----------- | 
-white  | GND         |
-orange | +5V         |
-blue   | SIGNAL      |
-
+color  | description
+------ | -----------
+white  | GND
+orange | +5V
+blue   | SIGNAL
 
 
 
 ## Custom Cable Harness
 
-orignal  | custom |
--------- | -------------------------- | 
-UART_TX  | Remote BTN +               |
-UART_RX  | Remote BTN -               |
-BRAKE    | BRAKE|BTN INFO|BTN PWR     |
-THROTTLE | THROTTLE                   |
-+5V      | +5V THROTTLE               |
-V_BAT+	 | -> ENABLE                  |
-ENABLE   | -> VBAT+                   |
+orignal  | custom
+-------- | -------------------------- 
+UART_TX  | Remote BTN (+)
+UART_RX  | Remote BTN (-)
+BRAKE    | BTN INFO || BTN PWR
+THROTTLE | THROTTLE
++5V      | +5V THROTTLE
+V_BAT+	 | -> ENABLE
+ENABLE   | -> VBAT+
