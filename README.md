@@ -46,7 +46,7 @@ This is the way the motor operates with the original firmware.
 There are 5 assist levels that can be tweaked in the code, see config.h.
 Assist level is adjusted by the (+) and (-) buttons on the keypad.
 
-This mode is entered by holding down info/power combo button for 2s
+This mode is entered by holding down the info/power combo button for 2s
 followed by pressing the (-) button.
 
 ### Cruise
@@ -64,7 +64,7 @@ There are two ways to exit paused cruise mode:
 * Press (+) button to return to previously selected power level.
 * Press (-) button to return to first power level (i.e. 0, no power).
 
-This mode is entered by holding down info/power combo button for 2s
+This mode is entered by holding the down info/power combo button for 2s
 followed by pressing the (+) button.
 
 ### Reset
