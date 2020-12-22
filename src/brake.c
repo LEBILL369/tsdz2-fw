@@ -6,7 +6,8 @@
  * Released under the GPL License, Version 3
  */
 #include "brake.h"
-#include "stm8s.h"
+
+#include <stm8s.h>
 
 void brake_init(void)
 {

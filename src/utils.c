@@ -5,11 +5,8 @@
  *
  * Released under the GPL License, Version 3
  */
-
-#include <stdint.h>
-#include <stdio.h>
-#include "stm8s.h"
 #include "utils.h"
+#include <stm8s.h>
 
 int32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max)
 {

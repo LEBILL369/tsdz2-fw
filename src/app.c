@@ -1,5 +1,5 @@
 /*
- * ebike-fw
+ * tsdz2-fw
  *
  * Copyright (C) Daniel Nilsson, 2020.
  *
