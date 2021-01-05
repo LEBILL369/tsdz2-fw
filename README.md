@@ -5,6 +5,8 @@ This firmware is intended to be used with the popular TSDZ2 electric bike mid mo
 It is based on the work of casainho and others.\
 https://github.com/OpenSourceEBike/TSDZ2-Smart-EBike
 
+PAS is currently not working correctly, do not use firmware.
+
 ## Purpose
 This firmware can be used to run the the TSDZ2 motor with the minimum amount
 of external components in order to possibly decrease the risk of downtime,
